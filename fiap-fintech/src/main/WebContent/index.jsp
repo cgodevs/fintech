@@ -40,11 +40,11 @@
                     <form method="post" action="login">
                         <div class="mb-3">
                             <input class="form-text credentials-input-format" name="username" id="username" type="text"
-                                placeholder="seu login">
+                                placeholder="seu login" required>
                         </div>
                         <div class="mb-3">
                             <input class="form-text credentials-input-format" name="password" id="password" type="password"
-                                placeholder="******">
+                                placeholder="******" required>
                         </div>
                         <div class="mb-2 form-check">
                             <input class="form-check-input" type="checkbox" id="stayConnected">
