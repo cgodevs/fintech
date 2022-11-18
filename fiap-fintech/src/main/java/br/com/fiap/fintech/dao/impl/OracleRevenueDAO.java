@@ -17,6 +17,8 @@ public class OracleRevenueDAO implements RevenueDAO {
 	private Connection connection;
 
 	private PreparedStatement stmt;
+	
+	public OracleRevenueDAO() { super(); };
 
 	@Override
 	public void insert(Revenue revenue) {
@@ -62,10 +64,12 @@ public class OracleRevenueDAO implements RevenueDAO {
 		try {
 			this.connection = ConnectionManager.getInstance().getConnection();
 			stmt = connection.prepareStatement("SELECT * FROM T_RECEITA");
+			
 			result = stmt.executeQuery();
 
 			Revenue revenue = null;
 			while (result.next()) {
+
 				java.sql.Date data = result.getDate("dt_receita");
 				Calendar revenueDate = Calendar.getInstance();
 				revenueDate.setTimeInMillis(data.getTime());

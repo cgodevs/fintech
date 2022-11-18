@@ -33,4 +33,9 @@ public class ConnectionManager {
 		}
 		return connection;
 	}
+	
+	public static void main(String[] args) {
+		Connection connection = ConnectionManager.getInstance().getConnection();
+		System.out.println(connection);
+	}
 }
