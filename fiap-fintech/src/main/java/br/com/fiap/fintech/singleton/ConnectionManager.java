@@ -20,8 +20,8 @@ public class ConnectionManager {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
-			connection = DriverManager.getConnection("jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL", "RM95051",
-					"050403");
+			connection = DriverManager.getConnection("jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL", "user",
+					"password");
 
 			return connection;
 		} catch (SQLException e) {
@@ -32,10 +32,5 @@ public class ConnectionManager {
 			e.printStackTrace();
 		}
 		return connection;
-	}
-	
-	public static void main(String[] args) {
-		Connection connection = ConnectionManager.getInstance().getConnection();
-		System.out.println(connection);
 	}
 }

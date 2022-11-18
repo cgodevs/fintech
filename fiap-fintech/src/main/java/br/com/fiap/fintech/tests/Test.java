@@ -13,9 +13,9 @@ public class Test {
 			List<Revenue> listOfAllRevenues = revenueDao.getAll();
 			for(Revenue revenueItem: listOfAllRevenues) {
 				System.out.println(
-						"Código da receita: " + revenueItem.getRevenueCode() + "\n" +
+						"Código da receita: " + revenueItem.getEntryCode() + "\n" +
 						"Código do usuário dono da receita: " + revenueItem.getUserCode() + "\n" +
-						"Nome da receita: " + revenueItem.getRevenueName() + "\n" +
+						"Nome da receita: " + revenueItem.getEntryValue() + "\n" +
 						"Descrição da receita: " + revenueItem.getDescription() + "\n\n"
 				);
 			}

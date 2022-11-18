@@ -32,12 +32,12 @@ public class OracleExpenseDAO implements ExpenseDAO {
 			this.stmt = connection.prepareStatement(sql);
 			
 			stmt.setInt(1, expense.getUserCode());
-			stmt.setDouble(2, expense.getExpenseValue());
-			stmt.setString(3, expense.getExpenseName());
-			java.sql.Date data = new java.sql.Date(expense.getExpenseDate().getTimeInMillis());
+			stmt.setDouble(2, expense.getEntryValue());
+			stmt.setString(3, expense.getEntryName());
+			java.sql.Date data = new java.sql.Date(expense.getEntryDate().getTimeInMillis());
 			stmt.setDate(4, data);
-			stmt.setString(5, expense.getIsReceived());
-			stmt.setString(6, expense.getIsFixedExpense());
+			stmt.setString(5, expense.getWasPaid());
+			stmt.setString(6, expense.getIsFixedEntry());
 			stmt.setString(7, expense.getDescription());
 
 			stmt.executeUpdate();
@@ -77,7 +77,8 @@ public class OracleExpenseDAO implements ExpenseDAO {
 						expenseDate,
 						result.getString("st_pago"),
 						result.getString("st_despesa_fixa"), 
-						result.getString("txt_descricao")
+						result.getString("txt_descricao"),
+						false
 				);
 
 				expenseList.add(expense);
@@ -146,7 +147,8 @@ public class OracleExpenseDAO implements ExpenseDAO {
 						expenseDate,
 						result.getString("st_pago"),
 						result.getString("st_despesa_fixa"),
-						result.getString("txt_descricao")
+						result.getString("txt_descricao"),
+						false
 				);
 			}
 		} catch (SQLException e) {
@@ -193,7 +195,8 @@ public class OracleExpenseDAO implements ExpenseDAO {
 						expenseDate,
 						result.getString("st_pago"),
 						result.getString("st_despesa_fixa"), 
-						result.getString("txt_descricao")
+						result.getString("txt_descricao"),
+						false
 				);
 
 				expenseList.add(expense);
@@ -223,16 +226,16 @@ public class OracleExpenseDAO implements ExpenseDAO {
 
 			stmt = connection.prepareStatement(sql);
 
-			java.sql.Date data = new java.sql.Date(expense.getExpenseDate().getTimeInMillis());
+			java.sql.Date data = new java.sql.Date(expense.getEntryDate().getTimeInMillis());
 
 			stmt.setDouble(1, expense.getUserCode());
-			stmt.setDouble(2, expense.getExpenseValue());
-			stmt.setString(3, expense.getExpenseName());
+			stmt.setDouble(2, expense.getEntryValue());
+			stmt.setString(3, expense.getEntryName());
 			stmt.setString(4, expense.getDescription());
 			stmt.setDate(5, data);
-			stmt.setString(6, expense.getIsReceived());
-			stmt.setString(7, expense.getIsFixedExpense());
-			stmt.setInt(8, expense.getExpenseCode());
+			stmt.setString(6, expense.getWasPaid());
+			stmt.setString(7, expense.getIsFixedEntry());
+			stmt.setInt(8, expense.getEntryCode());
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {

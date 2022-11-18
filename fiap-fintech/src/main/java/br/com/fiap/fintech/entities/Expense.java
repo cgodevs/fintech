@@ -11,8 +11,8 @@ public class Expense extends Entry implements Serializable {
 	public Expense () { super(); };
 	
 	public Expense(int expenseCode, int userCode, double expenseValue, String expenseName, Calendar expenseDate,
-			String wasPaid, String isFixedExpense, String description) {
-		super(expenseCode, userCode, expenseValue,  expenseName,  expenseDate, isFixedExpense, description);
+			String wasPaid, String isFixedExpense, String description, boolean isRevenue) {
+		super(expenseCode, userCode, expenseValue,  expenseName,  expenseDate, isFixedExpense, description, isRevenue);
 		this.wasPaid = wasPaid;
 	}
 
