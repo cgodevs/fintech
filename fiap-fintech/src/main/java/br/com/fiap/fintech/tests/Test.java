@@ -9,7 +9,6 @@ import br.com.fiap.fintech.factory.DAOFactory;
 public class Test {
 	public static void main(String[] args) {
 		try {
-			System.out.println("rodei");
 			RevenueDAO revenueDao = DAOFactory.getRevenueDAO();
 			List<Revenue> listOfAllRevenues = revenueDao.getAll();
 			for(Revenue revenueItem: listOfAllRevenues) {

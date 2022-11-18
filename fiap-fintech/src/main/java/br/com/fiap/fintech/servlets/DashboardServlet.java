@@ -32,13 +32,19 @@ public class DashboardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Revenue> revenueList = revenueDao.getAll();
 		List<Expense> expenseList = expenseDao.getAll();
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
+	
+	protected double getAllPostings(List<Revenue> revenueList, List<Expense> expenseList) {
+		return revenueList.addAll(expenseList);
+	}
 
-	protected double getValueOfAllRevenues(List<Revenue> revenueList) {
+	protected double getStarWithBalance(List<Revenue> revenueList) {
 		double revenueValues = 0;
 		for(Revenue revenue: revenueList) {
 			revenueValues += revenue.getRevenueValue();
@@ -46,7 +52,7 @@ public class DashboardServlet extends HttpServlet {
 		return revenueValues;
 	}
 	
-	protected double getValueOfAllExpenses(List<Expense> expenseList) {
+	protected double getCurrentBalance(List<Expense> expenseList) {
 		double expenseValues = 0;
 		for(Expense expense: expenseList) {
 			expenseValues += expense.getExpenseValue();
@@ -54,7 +60,23 @@ public class DashboardServlet extends HttpServlet {
 		return expenseValues;
 	}
 	
-	protected double getValueOfAllRevenues(List<Revenue> revenueList) {
+	protected double getExpectedToCloseWithBalance(List<Revenue> revenueList) {
+		double revenueValues = 0;
+		for(Revenue revenue: revenueList) {
+			revenueValues += revenue.getRevenueValue();
+		}
+		return revenueValues;
+	}
+	
+	protected double getMonthlyRevenueValue(List<Revenue> revenueList) {
+		double revenueValues = 0;
+		for(Revenue revenue: revenueList) {
+			revenueValues += revenue.getRevenueValue();
+		}
+		return revenueValues;
+	}
+	
+	protected double getMonthlyExpenseValue(List<Revenue> revenueList) {
 		double revenueValues = 0;
 		for(Revenue revenue: revenueList) {
 			revenueValues += revenue.getRevenueValue();
