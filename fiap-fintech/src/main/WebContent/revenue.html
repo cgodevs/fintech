@@ -28,26 +28,31 @@
     </header>
     <div class="container-fluid d-flex justify-content-center my-4">
         <form method="post" action="revenue">
-            <img class="img-fluid mx-auto d-block mt-4" src="./resources/images/income.svg" alt="">
+            <img class="img-fluid mx-auto d-block mt-2" src="./resources/images/income.svg" alt="">
             <div class="my-4">
-                <input class="revenue-form-text revenue-input-format" name="revenueDesc" id="revenueDesc" type="text" placeholder="descrição">
+                <input class="revenue-form-text revenue-input-format" name="revenueTitle" id="revenueTitle" type="text"
+                    placeholder="título" required>
+            </div>
+            <div class="my-4">
+                <input class="revenue-form-text revenue-input-format" name="revenueDesc" id="revenueDesc" type="text" placeholder="descrição" required>
             </div>
             <div class="my-4">
                 <input class="revenue-form-text revenue-input-format" name="revenueValue" id="revenueValue" type="text"
-                    placeholder="R$ 0,00">
+                    placeholder="R$ 0,00" required>
             </div>
             <div class="my-4">
-                <input class="revenue-input-date" name="revenueDate" id="revenueDate" type="date">
-            </div>
-            <div class="my-4">
-                <input class="form-check-input me-1" type="checkbox" id="revenueDateQuestion">
-                <label class="revenue-input-question" for="revenueDateQuestion" href="#">Essa despesa se repete?</label>
-            </div>
-            <div class="my-4">
-                <select class="revenue-form-text revenue-input-format" style="color: #948A9A !important" name="revenueCategory" id="revenueCategory" placeholder="categoria">
+                <select class="revenue-form-text revenue-input-format" style="color: #948A9A !important" name="revenueCategory"
+                    id="revenueCategory" placeholder="categoria" required>
                     <option value="" disabled selected>categoria</option>
                     <option class="form-text" value="categoria1">categoria1</option>
                 </select>
+            </div>
+            <div class="my-4">
+                <input class="revenue-input-date" name="revenueDate" id="revenueDate" type="date" required>
+            </div>
+            <div class="my-4">
+                <input class="form-check-input me-1" name="fixedEntryRev" type="checkbox" id="revenueDateQuestion">
+                <label class="revenue-input-question" for="revenueDateQuestion" href="#">Essa despesa se repete?</label>
             </div>
             <div class="text-center mt-4">
                 <a class="btn revenue-form-button mt-2" id="addRevenue" href="#"  role="button" type="submit"><nobr>Adicionar Receita</nobr></a>
