@@ -32,7 +32,7 @@ public class DashboardServlet extends HttpServlet {
 		super.init();
 		revenueDao = DAOFactory.getRevenueDAO();
 		expenseDao = DAOFactory.getExpenseDAO();
-		dashboard = dashboard.getInstance();
+		dashboard = Dashboard.getInstance();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,29 +41,22 @@ public class DashboardServlet extends HttpServlet {
 		
 		ArrayList<Entry> entries = getAllEntries(revenueList, expenseList);
 		
-		main(entries);
+		main(request, entries);
 	
 		request.getRequestDispatcher("dashboard.jsp").forward(request, response);
 	}
 	
-	protected void main(ArrayList<Entry> entries) {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
+	
+	protected void main(HttpServletRequest request, ArrayList<Entry> entries) {
 		for(Entry entry: entries) {		
 			handleStartWithBalance(entry);
+			handleCurrentBalance(entry);
+			handleExpectedToCloseWithBalance(entry);
+			handleMonthlyEntryValues(entry);
 		}
-	}
-
-	private void handleStartWithBalance(Entry entry) {
-		if(isAnEntryBeforeTheBeginningOfTheMonth(entry)) {
-			if(entry.isRevenue()) {
-				startWithBalance += entry.getEntryValue();
-			} else {
-				startWithBalance -= entry.getEntryValue();
-			}	
-		}
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		
+		request.setAttribute("dashboardData", dashboard);
 	}
 	
 	protected ArrayList<Entry> getAllEntries(List<Revenue> revenueList, List<Expense> expenseList) {
@@ -73,55 +66,93 @@ public class DashboardServlet extends HttpServlet {
 		return entryList;
 	}
 
-	protected double getStarWithBalance(ArrayList<Entry> entries) {
-		double startWithBalance = 0;
-		for(Entry entry: entries) {
-			if(isAnEntryBeforeTheBeginningOfTheMonth(entry)) {
-				if(entry.isRevenue()) {
-					startWithBalance += entry.getEntryValue();
-				} else {
-					startWithBalance -= entry.getEntryValue();
-				}	
-			}
+	private void handleStartWithBalance(Entry entry) {
+		if(isAnEntryBeforeTheBeginningOfTheMonth(entry)) {
+			if(entry.isRevenue()) {
+				dashboard.setStartWithBalance(dashboard.getStartWithBalance() + entry.getEntryValue());
+			} else {
+				dashboard.setStartWithBalance(dashboard.getStartWithBalance() - entry.getEntryValue());
+			}	
 		}
-		return startWithBalance;
 	}
 	
-//	protected double getCurrentBalance(List<Expense> expenseList) {
-//		double expenseValues = 0;
-//		for(Expense expense: expenseList) {
-//			expenseValues += expense.getExpenseValue();
-//		}
-//		return expenseValues;
-//	}
-//	
-//	protected double getExpectedToCloseWithBalance(List<Revenue> revenueList) {
-//		double revenueValues = 0;
-//		for(Revenue revenue: revenueList) {
-//			revenueValues += revenue.getRevenueValue();
-//		}
-//		return revenueValues;
-//	}
-//	
-//	protected double getMonthlyRevenueValue(List<Revenue> revenueList) {
-//		double revenueValues = 0;
-//		for(Revenue revenue: revenueList) {
-//			revenueValues += revenue.getRevenueValue();
-//		}
-//		return revenueValues;
-//	}
-//	
-//	protected double getMonthlyExpenseValue(List<Revenue> revenueList) {
-//		double revenueValues = 0;
-//		for(Revenue revenue: revenueList) {
-//			revenueValues += revenue.getRevenueValue();
-//		}
-//		return revenueValues;
-//	}
+	protected boolean isAnEntryBeforeTheEndOfTheMonth(Entry entry) {
+		Calendar entryDate = entry.getEntryDate();
+		Calendar monthStartDate = Calendar.getInstance();
+		return entryDate.before(monthStartDate);
+	}
+	
+	private void handleCurrentBalance(Entry entry) {
+		if(isAnEntryBeforeTheCurrentDate(entry)) {
+			if(entry.isRevenue()) {
+				dashboard.setCurrentBalance(dashboard.getCurrentBalance() + entry.getEntryValue());
+			} else {
+				dashboard.setCurrentBalance(dashboard.getCurrentBalance() - entry.getEntryValue());
+			}	
+		}
+	}
+	
+	protected boolean isAnEntryBeforeTheCurrentDate(Entry entry) {
+		Calendar entryDate = entry.getEntryDate();
+		Calendar currentDate = Calendar.getInstance();
+		return entryDate.before(currentDate);
+	}
+	
+	private void handleExpectedToCloseWithBalance(Entry entry) {
+		if(isAnEntryBeforeTheEndOfTheMonth(entry)) {
+			if(entry.isRevenue()) {
+				dashboard.setExpectedToCloseWithBalance(
+					dashboard.getExpectedToCloseWithBalance() - entry.getEntryValue()
+				);
+			} else {
+				dashboard.setExpectedToCloseWithBalance(
+					dashboard.getExpectedToCloseWithBalance() - entry.getEntryValue()
+				);
+			}	
+		}
+	}
 	
 	protected boolean isAnEntryBeforeTheBeginningOfTheMonth(Entry entry) {
 		Calendar entryDate = entry.getEntryDate();
-		Calendar monthStartDate = (Calendar) entryDate.clone();
-		monthStartDate.set(Calendar.DAY_OF_MONTH, 1);
-		return entryDate.before(monthStartDate);
-	}}
+		Calendar monthEndDate = (Calendar) entryDate.clone();
+		int lastDayOfTheMonth = monthEndDate.getActualMaximum(Calendar.DAY_OF_MONTH);
+		monthEndDate.set(Calendar.DAY_OF_MONTH, lastDayOfTheMonth);
+		return entryDate.before(monthEndDate);
+		
+		
+	}
+	
+	protected void handleMonthlyRevenueValue(Entry entry) {
+		int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+		
+		if(entry.getEntryDate().get(Calendar.MONTH) == currentMonth) {
+			
+		}
+	}
+	
+	protected void handleMonthlyEntryValues(Entry entry) {
+		int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+		
+		if(		
+			entry.isRevenue() &&
+			entry.getEntryDate().get(Calendar.MONTH) == currentMonth
+		) {
+			dashboard.setMonthlyRevenueValue(
+					dashboard.getMonthlyRevenueValue() + entry.getEntryValue()
+			);
+		}
+		
+		if(		
+			!entry.isRevenue() &&
+			entry.getEntryDate().get(Calendar.MONTH) == currentMonth
+		) {
+			dashboard.setMonthlyExpenseValue(
+					dashboard.getMonthlyExpenseValue() + entry.getEntryValue()
+			);
+		}
+	}
+}
+
+	
+
+	

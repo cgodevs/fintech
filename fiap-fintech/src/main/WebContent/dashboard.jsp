@@ -30,13 +30,20 @@
     <nav class="navbar navbar-expand-lg navigation" id="naviBar">
         <div class="container-fluid">
             <a class="nav-link dropdown-toggle navigation-text-main" id="navbarDropdown" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">Dezembro
+                data-bs-toggle="dropdown" aria-expanded="false">
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item navigation-text" href="#">Setembro</a></li>
-                <li><a class="dropdown-item navigation-text" href="#">Outubro</a></li>
-                <li><a class="dropdown-item navigation-text" href="#">Novembro</a></li>
-                <li><a class="dropdown-item navigation-text" href="#">Dezembro</a></li>
+            	<li><a class="dropdown-item navigation-text" href="dashboard">Janeiro</a></li>
+            	<li><a class="dropdown-item navigation-text" href="dashboard">Fevereiro</a></li>
+            	<li><a class="dropdown-item navigation-text" href="dashboard">Março</a></li>
+            	<li><a class="dropdown-item navigation-text" href="dashboard">Abril</a></li>
+            	<li><a class="dropdown-item navigation-text" href="dashboard">Maio</a></li>
+            	<li><a class="dropdown-item navigation-text" href="dashboard">Junho</a></li>
+            	<li><a class="dropdown-item navigation-text" href="dashboard">Julho</a></li>
+                <li><a class="dropdown-item navigation-text" href="dashboard">Setembro</a></li>
+                <li><a class="dropdown-item navigation-text" href="dashboard">Outubro</a></li>
+                <li><a class="dropdown-item navigation-text" href="dashboard">Novembro</a></li>
+                <li><a class="dropdown-item navigation-text" href="dashboard">Dezembro</a></li>
             </ul>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
