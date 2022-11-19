@@ -354,3 +354,79 @@
 .category5 {
     color: #6774E4;
 }
+
+.bg-color {
+    background-color: #FAFAFA;
+}
+
+.input-header-text {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.6px;
+    color: #FFFFFF;
+}
+
+.revenue-input-format {
+    outline: 0;
+    border: none;
+    border-bottom: 1px solid #8a849c;
+    box-shadow: none;
+    background-color: #FAFAFA;
+    width: 100%;
+}
+
+.revenue-form-text {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #312947 !important;
+}
+
+.revenue-input-date {
+    outline: 0;
+    border: none;
+    border-bottom: 1px solid #8a849c;
+    box-shadow: none;
+    background-color: #FAFAFA;
+    width: 50%;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #948A9A !important;
+}
+
+.revenue-input-question {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    text-decoration-line: underline;
+    color: #7D788A;
+}
+
+.revenue-form-button {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px !important;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FAFAFA !important;
+
+    width: 60%;
+
+    background-color: #6774E4 !important;
+    border: 0.5px solid #6774E4 !important;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
