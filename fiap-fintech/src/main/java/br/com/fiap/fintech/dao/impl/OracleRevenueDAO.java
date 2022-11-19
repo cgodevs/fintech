@@ -31,16 +31,16 @@ public class OracleRevenueDAO implements RevenueDAO {
 			String sql = "INSERT INTO T_RECEITA (cd_receita, cd_usuario, vl_receita, nm_receita, dt_receita, st_recebido, st_receita_fixa, txt_descricao) " + 
 			             "VALUES (SEQ_RECEITA.NEXTVAL, ?, ?, ?, ?, ?, ?, ?)";
 			
-			java.sql.Date data = new java.sql.Date(revenue.getRevenueDate().getTimeInMillis());
+			java.sql.Date data = new java.sql.Date(revenue.getEntryDate().getTimeInMillis());
 
 			this.stmt = connection.prepareStatement(sql);
 			
 			stmt.setInt(1, revenue.getUserCode());
-			stmt.setDouble(2, revenue.getRevenueValue());
-			stmt.setString(3, revenue.getRevenueName());
+			stmt.setDouble(2, revenue.getEntryValue());
+			stmt.setString(3, revenue.getEntryName());
 			stmt.setDate(4, data);
 			stmt.setString(5, revenue.getIsReceived());
-			stmt.setString(6, revenue.getIsFixedRevenue());
+			stmt.setString(6, revenue.getIsFixedEntry());
 			stmt.setString(7, revenue.getDescription());
 
 			stmt.executeUpdate();
@@ -229,16 +229,16 @@ public class OracleRevenueDAO implements RevenueDAO {
 
 			stmt = connection.prepareStatement(sql);
 
-			java.sql.Date data = new java.sql.Date(revenue.getRevenueDate().getTimeInMillis());
+			java.sql.Date data = new java.sql.Date(revenue.getEntryDate().getTimeInMillis());
 
 			stmt.setDouble(1, revenue.getUserCode());
-			stmt.setDouble(2, revenue.getRevenueValue());
-			stmt.setString(3, revenue.getRevenueName());
+			stmt.setDouble(2, revenue.getEntryValue());
+			stmt.setString(3, revenue.getEntryName());
 			stmt.setString(4, revenue.getDescription());
 			stmt.setDate(5, data);
 			stmt.setString(6, revenue.getIsReceived());
-			stmt.setString(7, revenue.getIsFixedRevenue());
-			stmt.setInt(8, revenue.getRevenueCode());
+			stmt.setString(7, revenue.getIsFixedEntry());
+			stmt.setInt(8, revenue.getEntryCode());
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
