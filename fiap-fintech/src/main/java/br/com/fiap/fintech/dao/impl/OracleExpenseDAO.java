@@ -77,8 +77,7 @@ public class OracleExpenseDAO implements ExpenseDAO {
 						expenseDate,
 						result.getString("st_pago"),
 						result.getString("st_despesa_fixa"), 
-						result.getString("txt_descricao"),
-						false
+						result.getString("txt_descricao")
 				);
 
 				expenseList.add(expense);
@@ -147,8 +146,7 @@ public class OracleExpenseDAO implements ExpenseDAO {
 						expenseDate,
 						result.getString("st_pago"),
 						result.getString("st_despesa_fixa"),
-						result.getString("txt_descricao"),
-						false
+						result.getString("txt_descricao")
 				);
 			}
 		} catch (SQLException e) {
@@ -195,8 +193,7 @@ public class OracleExpenseDAO implements ExpenseDAO {
 						expenseDate,
 						result.getString("st_pago"),
 						result.getString("st_despesa_fixa"), 
-						result.getString("txt_descricao"),
-						false
+						result.getString("txt_descricao")
 				);
 
 				expenseList.add(expense);

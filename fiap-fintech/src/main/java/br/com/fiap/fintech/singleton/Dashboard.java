@@ -17,7 +17,7 @@ public class Dashboard implements Serializable {
 //	private  selectedMonth;
 	private double startWithBalance;
 	private double currentBalance;
-	private double getExpectedToCloseWithBalance;
+	private double expectedToCloseWithBalance;
 	private double monthlyRevenueValue;
 	private double monthlyExpenseValue;
 	
@@ -28,7 +28,7 @@ public class Dashboard implements Serializable {
 		return currentBalance;
 	}
 	public double getExpectedToCloseWithBalance() {
-		return getExpectedToCloseWithBalance;
+		return expectedToCloseWithBalance;
 	}
 	public double getMonthlyRevenueValue() {
 		return monthlyRevenueValue;
@@ -43,7 +43,7 @@ public class Dashboard implements Serializable {
 		this.currentBalance = currentBalance;
 	}
 	public void setExpectedToCloseWithBalance(double getExpectedToCloseWithBalance) {
-		this.getExpectedToCloseWithBalance = getExpectedToCloseWithBalance;
+		this.expectedToCloseWithBalance = getExpectedToCloseWithBalance;
 	}
 	public void setMonthlyRevenueValue(double monthlyRevenueValue) {
 		this.monthlyRevenueValue = monthlyRevenueValue;

@@ -81,8 +81,7 @@ public class OracleRevenueDAO implements RevenueDAO {
 						revenueDate,
 						result.getString("st_recebido"),
 						result.getString("st_receita_fixa"), 
-						result.getString("txt_descricao"),
-						true
+						result.getString("txt_descricao")
 				);
 
 				revenueList.add(revenue);
@@ -152,8 +151,7 @@ public class OracleRevenueDAO implements RevenueDAO {
 						revenueDate,
 						result.getString("st_recebido"),
 						result.getString("st_receita_fixa"),
-						result.getString("txt_descricao"),
-						true
+						result.getString("txt_descricao")
 				);
 			}
 		} catch (SQLException e) {
@@ -200,8 +198,7 @@ public class OracleRevenueDAO implements RevenueDAO {
 						revenueDate,
 						result.getString("st_recebido"),
 						result.getString("st_receita_fixa"), 
-						result.getString("txt_descricao"),
-						true
+						result.getString("txt_descricao")
 				);
 
 				revenueList.add(revenue);

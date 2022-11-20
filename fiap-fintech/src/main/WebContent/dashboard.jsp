@@ -99,9 +99,9 @@
     </div>
     <!-- News cards (5 max)-->
     <div class="news-cards-scroll" id="newsCards">
-    	<c:forEach var="item" items="${itemsList}">
+    	<c:forEach var="entry" items="${comingUpNextEntries}">
     	<div class="card d-flex p-1 pe-2 money-in">
-    		<fmt:parseDate value="${item.date}" pattern="yyyy-MM-dd HH:mm:ss" var="itemDate"/>
+    		<fmt:parseDate value="${entry.date}" pattern="yyyy-MM-dd HH:mm:ss" var="entryDate"/>
             <div class="card-date d-flex"><fmt:formatDate pattern="dd/MM" value="${itemDate}" /></div>
             <div class="card-text d-flex my-2">${item.title}</div>
             <div class="card-value d-flex"> R$ ${item.value}</div>

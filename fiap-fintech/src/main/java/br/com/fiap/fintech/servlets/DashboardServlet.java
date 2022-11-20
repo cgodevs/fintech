@@ -2,7 +2,9 @@ package br.com.fiap.fintech.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -35,72 +37,69 @@ public class DashboardServlet extends HttpServlet {
 		dashboard = Dashboard.getInstance();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Revenue> revenueList = revenueDao.getAll();
 		List<Expense> expenseList = expenseDao.getAll();
 		
-		ArrayList<Entry> entries = getAllEntries(revenueList, expenseList);
+		ArrayList<Entry> allEntries = getAllEntries(revenueList, expenseList);
+		ArrayList<Entry> comingUpNextEntries = null ;
+		setDashboard(allEntries);
 		
-		main(request, entries);
-	
+		request.setAttribute("dashboardData", dashboard);	
+		request.setAttribute("comingUpNextEntries", allEntries); // TODO trocar por comingUpNextEntries	
 		request.getRequestDispatcher("dashboard.jsp").forward(request, response);
 	}
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
+	private ArrayList<Entry> getAllEntries(List<Revenue> revenueList, List<Expense> expenseList) {
+		ArrayList<Entry> entryList = new ArrayList<Entry>();
+		entryList.addAll(revenueList);
+		entryList.addAll(expenseList);
+		return entryList;
+	}
 	
-	protected void main(HttpServletRequest request, ArrayList<Entry> entries) {
+	private void setDashboard(ArrayList<Entry> entries) {
 		for(Entry entry: entries) {		
 			handleStartWithBalance(entry);
 			handleCurrentBalance(entry);
 			handleExpectedToCloseWithBalance(entry);
 			handleMonthlyEntryValues(entry);
 		}
-		
-		request.setAttribute("dashboardData", dashboard);
-	}
-	
-	protected ArrayList<Entry> getAllEntries(List<Revenue> revenueList, List<Expense> expenseList) {
-		ArrayList<Entry> entryList = new ArrayList<Entry>();
-		entryList.addAll(revenueList);
-		entryList.addAll(expenseList);
-		return entryList;
 	}
 
 	private void handleStartWithBalance(Entry entry) {
 		if(isAnEntryBeforeTheBeginningOfTheMonth(entry)) {
-			if(entry.isRevenue()) {
+			if(entry instanceof Revenue) 
 				dashboard.setStartWithBalance(dashboard.getStartWithBalance() + entry.getEntryValue());
-			} else {
+			else 
 				dashboard.setStartWithBalance(dashboard.getStartWithBalance() - entry.getEntryValue());
-			}	
 		}
 	}
 	
-	protected boolean isAnEntryBeforeTheEndOfTheMonth(Entry entry) {
+	private boolean isAnEntryBeforeTheBeginningOfTheMonth(Entry entry) {
 		Calendar entryDate = entry.getEntryDate();
-		Calendar monthStartDate = Calendar.getInstance();
-		return entryDate.before(monthStartDate);
+		Calendar thisMonthFirstDay = Calendar.getInstance();
+		thisMonthFirstDay.set(Calendar.DAY_OF_MONTH, 1);
+		return entryDate.before(thisMonthFirstDay);
 	}
 	
 	private void handleCurrentBalance(Entry entry) {
 		if(isAnEntryBeforeTheCurrentDate(entry)) {
-			if(entry.isRevenue()) {
+			if(entry instanceof Revenue) 
 				dashboard.setCurrentBalance(dashboard.getCurrentBalance() + entry.getEntryValue());
-			} else {
+			else 
 				dashboard.setCurrentBalance(dashboard.getCurrentBalance() - entry.getEntryValue());
-			}	
 		}
 	}
 	
-	protected boolean isAnEntryBeforeTheCurrentDate(Entry entry) {
+	private boolean isAnEntryBeforeTheCurrentDate(Entry entry) {
 		Calendar entryDate = entry.getEntryDate();
 		Calendar currentDate = Calendar.getInstance();
 		return entryDate.before(currentDate);
 	}
-	
+
 	private void handleExpectedToCloseWithBalance(Entry entry) {
-		if(isAnEntryBeforeTheEndOfTheMonth(entry)) {
-			if(entry.isRevenue()) {
+		if(isAnEntryBeforeTheNextMonth(entry)) {
+			if(entry instanceof Revenue) {
 				dashboard.setExpectedToCloseWithBalance(
 					dashboard.getExpectedToCloseWithBalance() - entry.getEntryValue()
 				);
@@ -112,29 +111,18 @@ public class DashboardServlet extends HttpServlet {
 		}
 	}
 	
-	protected boolean isAnEntryBeforeTheBeginningOfTheMonth(Entry entry) {
+	private boolean isAnEntryBeforeTheNextMonth(Entry entry) {
 		Calendar entryDate = entry.getEntryDate();
-		Calendar monthEndDate = (Calendar) entryDate.clone();
-		int lastDayOfTheMonth = monthEndDate.getActualMaximum(Calendar.DAY_OF_MONTH);
-		monthEndDate.set(Calendar.DAY_OF_MONTH, lastDayOfTheMonth);
-		return entryDate.before(monthEndDate);
-		
-		
+		Calendar nextMonthFirstDay = Calendar.getInstance();
+		nextMonthFirstDay.add(Calendar.MONTH, 1);
+		return entryDate.before(nextMonthFirstDay);
 	}
 	
-	protected void handleMonthlyRevenueValue(Entry entry) {
-		int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
-		
-		if(entry.getEntryDate().get(Calendar.MONTH) == currentMonth) {
-			
-		}
-	}
-	
-	protected void handleMonthlyEntryValues(Entry entry) {
+	private void handleMonthlyEntryValues(Entry entry) {
 		int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
 		
 		if(		
-			entry.isRevenue() &&
+			(entry instanceof Revenue) &&
 			entry.getEntryDate().get(Calendar.MONTH) == currentMonth
 		) {
 			dashboard.setMonthlyRevenueValue(
@@ -143,13 +131,16 @@ public class DashboardServlet extends HttpServlet {
 		}
 		
 		if(		
-			!entry.isRevenue() &&
+			(entry instanceof Expense) &&
 			entry.getEntryDate().get(Calendar.MONTH) == currentMonth
 		) {
 			dashboard.setMonthlyExpenseValue(
 					dashboard.getMonthlyExpenseValue() + entry.getEntryValue()
 			);
 		}
+	}
+	private void sortEntriesByDate(ArrayList<Entry> entries) {
+		return;
 	}
 }
 

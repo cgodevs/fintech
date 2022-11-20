@@ -13,12 +13,11 @@ public class Entry implements Serializable {
 	private Calendar entryDate;
 	private String isFixedEntry;
 	private String description;
-	private boolean isRevenue;
 	
 	public Entry() { super(); }
 
 	public Entry(int entryCode, int userCode, double entryValue, String entryName, Calendar entryDate,
-			String isFixedEntry, String description, boolean isRevenue) {
+			String isFixedEntry, String description) {
 		super();
 		this.entryCode = entryCode;
 		this.userCode = userCode;
@@ -27,7 +26,6 @@ public class Entry implements Serializable {
 		this.entryDate = entryDate;
 		this.isFixedEntry = isFixedEntry;
 		this.description = description;
-		this.isRevenue = isRevenue;
 	}
 	
 	public int getEntryCode() {
@@ -71,11 +69,5 @@ public class Entry implements Serializable {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public boolean isRevenue() {
-		return isRevenue;
-	}
-	public void setIsRevenue(boolean isRevenue) {
-		this.isRevenue = isRevenue;
 	}
 }

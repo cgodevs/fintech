@@ -37,7 +37,7 @@
                 <h1 class="text-center fw-bold login-title my-4">Oi de novo! :)</h1>
                 <!-- Login form -->
                 <div class="container form-rectangle d-flex mb-3 p-3">
-                    <form method="post" action="login">
+                    <form method="get" action="dashboard"> <!-- TODO: CHANGE BOTH ATTRIBUTES -->
                         <div class="mb-3">
                             <input class="form-text credentials-input-format" name="username" id="username" type="text"
                                 placeholder="seu login">
