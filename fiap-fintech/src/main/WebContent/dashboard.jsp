@@ -91,33 +91,23 @@
     </nav>
     <div class="container d-flex justify-content-center my-3" id="header">
         <div class="row">
-            <div class="col-12 col-md-3 dashboard-budget-text justify-content-center my-1">Iniciou o mês com R$<c:out value="${currentBalance}"/></div>
-            <div class="col-12 col-md-6 dashboard-budget-main justify-content-center my-1">R$<c:out value="${startBalanceThisMonth}"/></div>
-            <div class="col-12 col-md-3 dashboard-budget-text justify-content-center my-1">Previsto fechar com R$<c:out value="${closeBalanceThisMonth}"/>
-            </div>
+        	<c:set var="currentBalance"><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${dashboardData.currentBalance}" /></c:set>
+    	    <c:set var="startWithBalance"><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${dashboardData.startWithBalance}" /></c:set>
+    	    <c:set var="expectedToCloseWithBalance"><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${dashboardData.expectedToCloseWithBalance}" /></c:set>
+            <div class="col-12 col-md-3 dashboard-budget-text justify-content-center my-1">Iniciou o mês com R$<c:out value="${startWithBalance}"/></div>
+            <div class="col-12 col-md-6 dashboard-budget-main justify-content-center my-1">R$<c:out value="${currentBalance}"/></div>
+            <div class="col-12 col-md-3 dashboard-budget-text justify-content-center my-1">Previsto fechar com R$<c:out value="${expectedToCloseWithBalance}"/></div>
         </div>
     </div>
     <!-- News cards (5 max)-->
     <div class="news-cards-scroll" id="newsCards">
-    	<c:forEach var="entry" items="${comingUpNextEntries}">
+    	<c:forEach var="entry" items="${comingNextEntries}">
     	<div class="card d-flex p-1 pe-2 money-in">
-    		<fmt:parseDate value="${entry.date}" pattern="yyyy-MM-dd HH:mm:ss" var="entryDate"/>
-            <div class="card-date d-flex"><fmt:formatDate pattern="dd/MM" value="${itemDate}" /></div>
-            <div class="card-text d-flex my-2">${item.title}</div>
-            <div class="card-value d-flex"> R$ ${item.value}</div>
+            <div class="card-date d-flex"><fmt:formatDate type="time" pattern="dd/MM" value="${entry.entryDate.time}" /></div> 
+            <div class="card-text d-flex my-2 text-center">${entry.entryName}</div>
+            <div class="card-value d-flex"> R$ ${entry.entryValue}</div>
         </div>
         </c:forEach>
-       <!--   Exemplos de Cards -->
-       <!-- <div class="card d-flex p-1 pe-2 money-in">
-            <div class="card-date d-flex">15/12</div>
-            <div class="card-text d-flex my-2">Devoluá§á£o dinheiro</div>
-            <div class="card-value d-flex">+ R$ 80,00</div>
-        </div>
-        <div class="card d-flex p-1 pe-2 money-out">
-            <div class="card-date d-flex">18/12</div>
-            <div class="card-text d-flex my-2">Pagamento Internet</div>
-            <div class="card-value d-flex">- R$ 129,90</div>
-        </div> -->
     </div>
     
     <!-- Content -->
@@ -129,7 +119,7 @@
                         <div class="col-12 total receita mb-2 mb-md-4 d-inline-flex">
                             <div class="container d-flex flex-column justify-content-center align-items-start">
                                <!--  <div class="value">+ R$ 4820,00</div> --> 
-                               <div class="value"> <c:out value="${thisMonthTotalRevenues}"/> </div>
+                               <div class="value"> <c:out value="R$ ${dashboardData.monthlyRevenueValue}"/> </div>
                                 <div class="name">Receita mensal</div>
                             </div>
                             <div class="container d-flex">
@@ -140,7 +130,7 @@
                         <div class="col-12 total despesa d-inline-flex">
                             <div class="container d-flex flex-column justify-content-center align-items-start">
                          <!--      <div class="value">- R$ 2474,15</div> --> 
-                          <div class="value"> <c:out value="${thisMonthTotalExpenses}"/> </div>
+                          <div class="value"> <c:out value="R$ ${dashboardData.monthlyExpenseValue}"/> </div>
                                 <div class="name">Despesa mensal</div>
                             </div>
                             <div class="container d-flex">

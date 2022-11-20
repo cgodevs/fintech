@@ -24,7 +24,6 @@ import br.com.fiap.fintech.singleton.Dashboard;
 @WebServlet("/dashboard")
 public class DashboardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
 	private RevenueDAO revenueDao;
 	private ExpenseDAO expenseDao;
 	private Dashboard dashboard;
@@ -42,11 +41,12 @@ public class DashboardServlet extends HttpServlet {
 		List<Expense> expenseList = expenseDao.getAll();
 		
 		ArrayList<Entry> allEntries = getAllEntries(revenueList, expenseList);
-		ArrayList<Entry> comingUpNextEntries = null ;
+		ArrayList<Entry> comingNextEntries = takeSomeNextEntries(allEntries, 5) ;
+		sortEntries(comingNextEntries);
 		setDashboard(allEntries);
 		
 		request.setAttribute("dashboardData", dashboard);	
-		request.setAttribute("comingUpNextEntries", allEntries); // TODO trocar por comingUpNextEntries	
+		request.setAttribute("comingNextEntries", comingNextEntries); 	
 		request.getRequestDispatcher("dashboard.jsp").forward(request, response);
 	}
 	
@@ -139,9 +139,40 @@ public class DashboardServlet extends HttpServlet {
 			);
 		}
 	}
-	private void sortEntriesByDate(ArrayList<Entry> entries) {
-		return;
+	
+	private static ArrayList<Entry> takeSomeNextEntries(ArrayList<Entry> allEntries, int numberOfEntries){
+		ArrayList<Entry> nextEntries = new ArrayList<Entry>();
+		ArrayList<Entry> futureEntries = getFutureEntries(allEntries);
+		for(int n = 0; n < numberOfEntries; n++) 
+			nextEntries.add(futureEntries.get(n));
+		return nextEntries;
 	}
+	
+	private static ArrayList<Entry> getFutureEntries(ArrayList<Entry> entries) {
+		ArrayList<Entry> nextEntries = new ArrayList<Entry>();
+		Calendar today = Calendar.getInstance();
+		
+		for (Entry entry: entries) {
+			if (entry.getEntryDate().after(today)) {
+				nextEntries.add(entry);
+			}
+		}
+		return nextEntries;
+	}
+	
+	private static void sortEntries(ArrayList<Entry> entries) {
+		for (int i = 0; i < entries.size(); i++) { 	// insertion sort 
+			for (int j = i+1; j < entries.size(); j++) {
+				Entry currentEntry = entries.get(i);
+				Entry comparingEntry = entries.get(j);
+				if (currentEntry.getEntryDate().after(comparingEntry.getEntryDate())){
+					entries.set(i, comparingEntry);
+					entries.set(j, currentEntry);
+				}
+			}
+		}
+	}
+	
 }
 
 	
