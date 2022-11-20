@@ -27,7 +27,6 @@ public class LoginFilter extends HttpFilter implements Filter {
 
 		HttpSession session = request.getSession();
 		session.setAttribute("username", username);
-		session.setAttribute("password", password);
 		
 		chain.doFilter(servletRequest, servletResponse);
 		return;

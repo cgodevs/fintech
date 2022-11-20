@@ -41,7 +41,6 @@ public class EntryServlet extends HttpServlet {
 		String isFixedEntry = request.getParameterValues("fixedEntry") == null ? "N" : "S";
 		double value = Double.parseDouble(request.getParameter("value"));
 		Calendar date = retrieveDateFromInput(request.getParameter("date"));
-//		String category = request.getParameter("category"); //TODO add category to Revenue 
 
 		String entryType = request.getParameter("entryType");  
 		

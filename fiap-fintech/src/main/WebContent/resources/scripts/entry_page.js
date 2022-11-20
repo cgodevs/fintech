@@ -1,6 +1,6 @@
 function changeCheckBoxValue(checkBoxId){
-	let checkBox = document.getElementById(checkBoxId);
-	if (checkBox.value == "true") 
+	const checkBox = document.getElementById(checkBoxId);
+	if (checkBox.value) 
 		checkBox.value = "false";
 	else
 		checkBox.value = "true";
