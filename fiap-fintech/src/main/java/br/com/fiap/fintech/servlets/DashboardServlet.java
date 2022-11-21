@@ -28,6 +28,7 @@ public class DashboardServlet extends HttpServlet {
 	private RevenueDAO revenueDao;
 	private ExpenseDAO expenseDao;
 	private Dashboard dashboard;
+	ArrayList<Entry> comingNextEntries;
        
 	@Override
 	public void init() throws ServletException {
@@ -35,21 +36,20 @@ public class DashboardServlet extends HttpServlet {
 		revenueDao = DAOFactory.getRevenueDAO();
 		expenseDao = DAOFactory.getExpenseDAO();
 		dashboard = Dashboard.getInstance();
-	}
-
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Revenue> revenueList = revenueDao.getAll();
 		List<Expense> expenseList = expenseDao.getAll();
 		
 		ArrayList<Entry> allEntries = getAllEntries(revenueList, expenseList);
-		ArrayList<Entry> comingNextEntries = takeSomeNextEntries(allEntries, 5) ;
+		comingNextEntries = takeSomeNextEntries(allEntries, 5) ;
 		
 		if (Objects.nonNull(comingNextEntries)) 
 			sortEntries(comingNextEntries);
 		
 		if (Objects.nonNull(allEntries)) 
 			setDashboard(allEntries);
-		
+	}
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("dashboardData", dashboard);	
 		request.setAttribute("comingNextEntries", comingNextEntries); 	
 		request.getRequestDispatcher("dashboard.jsp").forward(request, response);
@@ -120,9 +120,10 @@ public class DashboardServlet extends HttpServlet {
 	
 	private boolean isAnEntryBeforeTheNextMonth(Entry entry) {
 		Calendar entryDate = entry.getEntryDate();
-		Calendar nextMonthFirstDay = Calendar.getInstance();
-		nextMonthFirstDay.add(Calendar.MONTH, 1);
-		return entryDate.before(nextMonthFirstDay);
+		Calendar nextMonthFirstDay = (Calendar) entryDate.clone();
+		nextMonthFirstDay.set(Calendar.DATE, 1);
+		nextMonthFirstDay.set(Calendar.MONTH, Calendar.getInstance().get(Calendar.MONTH)+1);
+		return entryDate.before(nextMonthFirstDay) ;
 	}
 	
 	private void handleMonthlyEntryValues(Entry entry) {
