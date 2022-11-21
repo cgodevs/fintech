@@ -44,10 +44,11 @@ public class DashboardServlet extends HttpServlet {
 		ArrayList<Entry> allEntries = getAllEntries(revenueList, expenseList);
 		ArrayList<Entry> comingNextEntries = takeSomeNextEntries(allEntries, 5) ;
 		
-		if (Objects.nonNull(comingNextEntries) && Objects.nonNull(allEntries)) {
+		if (Objects.nonNull(comingNextEntries)) 
 			sortEntries(comingNextEntries);
+		
+		if (Objects.nonNull(allEntries)) 
 			setDashboard(allEntries);
-		}
 		
 		request.setAttribute("dashboardData", dashboard);	
 		request.setAttribute("comingNextEntries", comingNextEntries); 	
@@ -107,7 +108,7 @@ public class DashboardServlet extends HttpServlet {
 		if(isAnEntryBeforeTheNextMonth(entry)) {
 			if(entry instanceof Revenue) {
 				dashboard.setExpectedToCloseWithBalance(
-					dashboard.getExpectedToCloseWithBalance() - entry.getEntryValue()
+					dashboard.getExpectedToCloseWithBalance() + entry.getEntryValue()
 				);
 			} else {
 				dashboard.setExpectedToCloseWithBalance(
@@ -149,7 +150,7 @@ public class DashboardServlet extends HttpServlet {
 	private static ArrayList<Entry> takeSomeNextEntries(ArrayList<Entry> allEntries, int numberOfEntries){
 		ArrayList<Entry> futureEntries = getFutureEntries(allEntries);
 		ArrayList<Entry> nextEntries = new ArrayList<Entry>();
-		if(futureEntries.isEmpty())
+		if(futureEntries.isEmpty() || nextEntries.isEmpty())
 			return null;
 		for(int n = 0; n < numberOfEntries; n++) 
 			nextEntries.add(futureEntries.get(n));
