@@ -2,9 +2,7 @@ package br.com.fiap.fintech.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -41,12 +39,9 @@ public class DashboardServlet extends HttpServlet {
 		List<Expense> expenseList = expenseDao.getAll();
 		
 		ArrayList<Entry> allEntries = getAllEntries(revenueList, expenseList);
-		ArrayList<Entry> comingNextEntries = takeSomeNextEntries(allEntries, 5) ;
-		sortEntries(comingNextEntries);
-		setDashboard(allEntries);
 		
-		request.setAttribute("dashboardData", dashboard);	
-		request.setAttribute("comingNextEntries", comingNextEntries); 	
+		setDashboard(request ,allEntries);
+		
 		request.getRequestDispatcher("dashboard.jsp").forward(request, response);
 	}
 	
@@ -57,13 +52,17 @@ public class DashboardServlet extends HttpServlet {
 		return entryList;
 	}
 	
-	private void setDashboard(ArrayList<Entry> entries) {
+	private void setDashboard(HttpServletRequest request, ArrayList<Entry> entries) {
 		for(Entry entry: entries) {		
 			handleStartWithBalance(entry);
 			handleCurrentBalance(entry);
 			handleExpectedToCloseWithBalance(entry);
 			handleMonthlyEntryValues(entry);
 		}
+		
+		dashboard.setComingNextEntries(takeSomeNextEntries(entries, 5) );
+		
+		request.setAttribute("dashboardData", dashboard);	
 	}
 
 	private void handleStartWithBalance(Entry entry) {
@@ -145,7 +144,8 @@ public class DashboardServlet extends HttpServlet {
 		ArrayList<Entry> futureEntries = getFutureEntries(allEntries);
 		for(int n = 0; n < numberOfEntries; n++) 
 			nextEntries.add(futureEntries.get(n));
-		return nextEntries;
+		
+		return sortEntries(nextEntries);
 	}
 	
 	private static ArrayList<Entry> getFutureEntries(ArrayList<Entry> entries) {
@@ -160,21 +160,17 @@ public class DashboardServlet extends HttpServlet {
 		return nextEntries;
 	}
 	
-	private static void sortEntries(ArrayList<Entry> entries) {
-		for (int i = 0; i < entries.size(); i++) { 	// insertion sort 
-			for (int j = i+1; j < entries.size(); j++) {
-				Entry currentEntry = entries.get(i);
-				Entry comparingEntry = entries.get(j);
-				if (currentEntry.getEntryDate().after(comparingEntry.getEntryDate())){
-					entries.set(i, comparingEntry);
-					entries.set(j, currentEntry);
-				}
+	private static ArrayList<Entry> sortEntries(ArrayList<Entry> entries) {	
+		for (int i = 0; i < entries.size(); i++) { 
+			Entry currentEntry = entries.get(i);
+			Entry comparingEntry = entries.get(i+1);
+			if (currentEntry.getEntryDate().after(comparingEntry.getEntryDate())){
+				entries.set(i, comparingEntry);
+				entries.set(i+1, currentEntry);
 			}
 		}
+		
+		return entries;
 	}
 	
 }
-
-	
-
-	

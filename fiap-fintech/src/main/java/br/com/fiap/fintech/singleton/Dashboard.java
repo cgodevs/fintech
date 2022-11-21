@@ -1,6 +1,9 @@
 package br.com.fiap.fintech.singleton;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import br.com.fiap.fintech.entities.Entry;
 
 public class Dashboard implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -14,7 +17,8 @@ public class Dashboard implements Serializable {
 		return instance;
 	}
 	
-//	private  selectedMonth;
+	private ArrayList<Entry> comingNextEntries;
+
 	private double startWithBalance;
 	private double currentBalance;
 	private double expectedToCloseWithBalance;
@@ -50,5 +54,11 @@ public class Dashboard implements Serializable {
 	}
 	public void setMonthlyExpenseValue(double monthlyExpenseValue) {
 		this.monthlyExpenseValue = monthlyExpenseValue;
+	}
+	public ArrayList<Entry> getComingNextEntries() {
+		return comingNextEntries;
+	}
+	public void setComingNextEntries(ArrayList<Entry> comingNextEntries) {
+		this.comingNextEntries = comingNextEntries;
 	}
 }
