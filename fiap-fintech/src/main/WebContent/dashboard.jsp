@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="br.com.fiap.fintech.entities.Revenue"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
@@ -28,23 +28,21 @@
 
 <body class="background">
     <nav class="navbar navbar-expand-lg navigation" id="naviBar">
-        <div class="container-fluid">
-            <a class="nav-link dropdown-toggle navigation-text-main" id="navbarDropdown" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            	<li><a class="dropdown-item navigation-text" href="dashboard">Janeiro</a></li>
-            	<li><a class="dropdown-item navigation-text" href="dashboard">Fevereiro</a></li>
-            	<li><a class="dropdown-item navigation-text" href="dashboard">Março</a></li>
-            	<li><a class="dropdown-item navigation-text" href="dashboard">Abril</a></li>
-            	<li><a class="dropdown-item navigation-text" href="dashboard">Maio</a></li>
-            	<li><a class="dropdown-item navigation-text" href="dashboard">Junho</a></li>
-            	<li><a class="dropdown-item navigation-text" href="dashboard">Julho</a></li>
-                <li><a class="dropdown-item navigation-text" href="dashboard">Setembro</a></li>
-                <li><a class="dropdown-item navigation-text" href="dashboard">Outubro</a></li>
-                <li><a class="dropdown-item navigation-text" href="dashboard">Novembro</a></li>
-                <li><a class="dropdown-item navigation-text" href="dashboard">Dezembro</a></li>
-            </ul>
+        <div class="container-fluid">            
+            <select class="form-select form-select-sm navigation-text-main" aria-label=".form-select-sm example" style="width: 8rem">
+			  <option value="0">Janeiro</option>
+			  <option value="1">Fevereiro</option>
+			  <option value="2">Março</option>
+			  <option value="3">Abril</option>
+			  <option value="4">Maio</option>
+			  <option value="5">Junho</option>
+			  <option value="6">Julho</option>
+			  <option value="7">Agosto</option>
+			  <option value="8">Setembro</option>
+			  <option value="9">Outubro</option>
+			  <option value="10" selected>Novembro</option>
+			  <option value="11">Dezembro</option>
+			</select>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
@@ -102,11 +100,11 @@
     <!-- News cards (5 max)-->
     <div class="news-cards-scroll" id="newsCards">
     	<c:forEach var="entry" items="${comingNextEntries}">
-    	<div class="card d-flex p-1 pe-2 money-in">
-            <div class="card-date d-flex"><fmt:formatDate type="time" pattern="dd/MM" value="${entry.entryDate.time}" /></div> 
-            <div class="card-text d-flex my-2 text-center">${entry.entryName}</div>
-            <div class="card-value d-flex"> R$ ${entry.entryValue}</div>
-        </div>
+	    	<div class="card d-flex p-1 pe-2 money-in" class="${entry.isRevenue ? 'money-in' : 'money-out'}">
+	            <div class="card-date d-flex"><fmt:formatDate type="time" pattern="dd/MM" value="${entry.entryDate.time}" /></div> 
+	            <div class="card-text d-flex my-2 text-center">${entry.entryName}</div>
+	            <div class="card-value d-flex"> R$ ${entry.entryValue}</div>
+	        </div>
         </c:forEach>
     </div>
     

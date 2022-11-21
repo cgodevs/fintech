@@ -2,9 +2,7 @@ package br.com.fiap.fintech.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -171,13 +169,13 @@ public class DashboardServlet extends HttpServlet {
 	}
 	
 	private static void sortEntries(ArrayList<Entry> entries) {
-		for (int i = 0; i < entries.size(); i++) { 	// insertion sort 
-			for (int j = i+1; j < entries.size(); j++) {
+		for (int i = 0; i < entries.size(); i++) {
+			if(entries.size() > i) {
 				Entry currentEntry = entries.get(i);
-				Entry comparingEntry = entries.get(j);
+				Entry comparingEntry = entries.get(i+1);
 				if (currentEntry.getEntryDate().after(comparingEntry.getEntryDate())){
 					entries.set(i, comparingEntry);
-					entries.set(j, currentEntry);
+					entries.set(i+1, currentEntry);
 				}
 			}
 		}

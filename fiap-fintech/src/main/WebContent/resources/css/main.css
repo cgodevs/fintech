@@ -266,12 +266,12 @@
 }
 
 .money-in {
-    background-image: url("./assets/images/money-in.svg") !important;
+    background-image: url("../images/money-in.svg") !important;
     background-repeat: no-repeat !important;
 }
 
 .money-out {
-    background-image: url("./assets/images/money-out.svg") !important;
+    background-image: url("../images/money-out.svg") !important;
         background-repeat: no-repeat !important;
 }
 
