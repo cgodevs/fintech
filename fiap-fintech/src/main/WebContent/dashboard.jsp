@@ -51,8 +51,8 @@
                             <a class="nav-link dropdown-toggle active navigation-text-active" id="newEntryDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">Novo Lançamento</a>
                             <ul class="dropdown-menu mt-3" aria-labelled by="newEntryDropdown">
-                                <li><a class="dropdown-item navigation-text" href="#">Nova receita</a></li>
-                                <li><a class="dropdown-item navigation-text" href="#">Nova despesa</a></li>
+                                <li><a class="dropdown-item navigation-text" href="revenue.jsp">Nova receita</a></li>
+                                <li><a class="dropdown-item navigation-text" href="expense.jsp">Nova despesa</a></li>
                                 <li><a class="dropdown-item navigation-text disabled" href="#">Novo lembrete</a></li>
                             </ul>
                         </div>

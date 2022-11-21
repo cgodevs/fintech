@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -19,34 +20,15 @@ public class LoginFilter extends HttpFilter implements Filter {
 	private static final long serialVersionUID = 1L;
 
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
-		System.out.println("Got into Login Filter!");
 
 		HttpServletRequest request  = (HttpServletRequest) servletRequest;
-		HttpServletResponse response  = (HttpServletResponse) servletResponse;
-		HttpSession session = request.getSession();
-		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 
-		boolean credentialsAreInformed = (Objects.nonNull(username) && Objects.nonNull(password) 
-											&& !username.isEmpty() && !password.isEmpty());
-		
-		if (!credentialsAreInformed) {
-			System.out.println("Credentials not informed");
-			//response.sendRedirect("/login");
-			//return;
-		} 
-//		else {
-//			session.setAttribute("username", session.getAttribute("username"));
-//			session.setAttribute("password", session.getAttribute("password"));
-//		}
-//		
-//		boolean credentialsExistInDatabase = true; // TODO chamar DAO aqui!
-//		if (!credentialsExistInDatabase) {
-//			response.sendRedirect("/login");
-//			return;
-//		}	
+		HttpSession session = request.getSession();
+		session.setAttribute("username", username);
 		
 		chain.doFilter(servletRequest, servletResponse);
+		return;
 	}
 }

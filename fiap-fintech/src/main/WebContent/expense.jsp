@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -18,6 +22,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"
         defer></script>
+    <script src="./resources/scripts/entry_page.js" defer></script> 
+        
 
     <title>Nova Despesa</title>
 </head>
@@ -26,36 +32,49 @@
         <a class="mx-1" role="button" href="./dashboard.jsp"><img class="img-fluid " src="./resources/images/return_breadcrumb.svg"></a>
         <nobr>Adicionar nova despesa...</nobr>
     </header>
+    
+   	<!-- SUCCESS ENTRY ALERT -->
+   	<c:if test="${ not empty msg}">
+    <div class="alert alert-success" role="alert" id="success-alert">
+  		<c:out value="${msg}" />
+	</div>	
+	</c:if>
+   	<!--/ SUCCESS ENTRY ALERT -->
+   	
     <div class="container-fluid d-flex justify-content-center my-4">
-        <form method="post" action="revenue">
+        <form method="post" action="addEntryItem?entryType=expense">
             <img class="img-fluid mx-auto d-block mt-2" src="./resources/images/income.svg" alt="">
             <div class="my-4">
-                <input class="revenue-form-text revenue-input-format" name="expenseTitle" id="expenseTitle" type="text"
-                    placeholder="título" required>
+                <input class="revenue-form-text revenue-input-format" name="title" id="title" type="text"
+                    placeholder="título" onfocus="dismissSuccessAlert()" required>
             </div>
             <div class="my-4">
-                <input class="revenue-form-text revenue-input-format" name="expenseDesc" id="expenseDesc" type="text" placeholder="descrição" required>
+                <input class="revenue-form-text revenue-input-format" name="desc" id="desc" type="text" placeholder="descrição" >
             </div>
             <div class="my-4">
-                <input class="revenue-form-text revenue-input-format" name="expenseValue" id="expenseValue" type="text"
+                <input class="revenue-form-text revenue-input-format" name="value" id="value" type="text"
                     placeholder="R$ 0,00" required>
             </div>
             <div class="my-4">
-                <select class="revenue-form-text revenue-input-format" style="color: #948A9A !important" name="expenseCategory"
-                    id="expenseCategory" placeholder="categoria" required>
+                <select class="revenue-form-text revenue-input-format" style="color: #948A9A !important" name="category"
+                    id="category" placeholder="categoria" required>
                     <option value="" disabled selected>categoria</option>
-                    <option class="form-text" value="categoria1">categoria1</option>
+                    <option class="form-text" value="faculdade">Faculdade</option>
+                    <option class="form-text" value="energia">Energia</option>
+                    <option class="form-text" value="aluguel">Aluguel</option>
+                    <option class="form-text" value="alimentacao">Alimentação</option>
+                    <option class="form-text" value="agua">Água</option>
                 </select>
             </div>
             <div class="my-4">
-                <input class="revenue-input-date" name="expenseDate" id="expenseDate" type="date" required>
+                <input class="revenue-input-date" name="date" id="date" type="date" required>
             </div>
             <div class="my-4">
-                <input class="form-check-input me-1" name="fixedEntryExp" type="checkbox" id="expenseDateQuestion">
-                <label class="revenue-input-question" for="expenseDateQuestion" href="#">Essa despesa se repete?</label>
+                <input class="form-check-input me-1" name="fixedEntry" type="checkbox" id="fixedEntryExp" value="false" onclick="changeCheckBoxValue('fixedEntryExp')">
+                <label class="revenue-input-question" for="fixedEntryExp" href="#">Esta despesa se repete?</label>
             </div>
             <div class="text-center mt-4">
-                <a class="btn revenue-form-button mt-2" id="addExpense" href="#"  role="button" type="submit"><nobr>Adicionar Despesa</nobr></a>
+                <button class="btn revenue-form-button mt-2" id="addExpenseBtn" role="button" type="submit"><nobr>Adicionar Despesa</nobr></button>
             </div>
         </form>
     </div>
