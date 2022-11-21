@@ -3,11 +3,9 @@ package br.com.fiap.fintech.servlets;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,6 +51,7 @@ public class EntryServlet extends HttpServlet {
 			newRevenue.setIsReceived(getIsReceivedFromEntryDate(date)); 
 			newRevenue.setDescription(description);
 			newRevenue.setIsFixedEntry(isFixedEntry); 
+			newRevenue.setisRevenue(true);
 			revenueDAO.insert(newRevenue);
 			request.setAttribute("msg", "Receita cadastrada com sucesso!");	
 			request.getRequestDispatcher("/revenue.jsp").forward(request, response);
@@ -65,6 +64,7 @@ public class EntryServlet extends HttpServlet {
 			newExpense.setWasPaid(getIsReceivedFromEntryDate(date)); 
 			newExpense.setDescription(description);
 			newExpense.setIsFixedEntry(isFixedEntry); 
+			newExpense.setisRevenue(false);
 			expenseDAO.insert(newExpense);
 			request.setAttribute("msg", "Despesa cadastrada com sucesso!");	
 			request.getRequestDispatcher("/expense.jsp").forward(request, response);

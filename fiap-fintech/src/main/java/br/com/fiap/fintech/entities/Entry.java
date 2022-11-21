@@ -74,7 +74,7 @@ public class Entry implements Serializable {
 	public boolean isRevenue() {
 		return isRevenue;
 	}
-	public void setRevenue(boolean isRevenue) {
+	public void setisRevenue(boolean isRevenue) {
 		this.isRevenue = isRevenue;
 	}
 }
