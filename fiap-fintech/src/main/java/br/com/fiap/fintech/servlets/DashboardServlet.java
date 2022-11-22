@@ -26,7 +26,6 @@ public class DashboardServlet extends HttpServlet {
 	private RevenueDAO revenueDao;
 	private ExpenseDAO expenseDao;
 	private Dashboard dashboard;
-	ArrayList<Entry> comingNextEntries;
        
 	@Override
 	public void init() throws ServletException {
@@ -34,20 +33,20 @@ public class DashboardServlet extends HttpServlet {
 		revenueDao = DAOFactory.getRevenueDAO();
 		expenseDao = DAOFactory.getExpenseDAO();
 		dashboard = Dashboard.getInstance();
+	}
+
+	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		dashboard.clean();
 		List<Revenue> revenueList = revenueDao.getAll();
 		List<Expense> expenseList = expenseDao.getAll();
-		
 		ArrayList<Entry> allEntries = getAllEntries(revenueList, expenseList);
-		comingNextEntries = takeSomeNextEntries(allEntries, 5) ;
+		ArrayList<Entry> comingNextEntries = takeSomeNextEntries(allEntries, 5) ;
 		
 		if (Objects.nonNull(comingNextEntries)) 
 			sortEntries(comingNextEntries);
 		
 		if (Objects.nonNull(allEntries)) 
 			setDashboard(allEntries);
-	}
-
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("dashboardData", dashboard);	
 		request.setAttribute("comingNextEntries", comingNextEntries); 	
 		request.getRequestDispatcher("dashboard.jsp").forward(request, response);

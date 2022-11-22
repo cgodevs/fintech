@@ -51,4 +51,12 @@ public class Dashboard implements Serializable {
 	public void setMonthlyExpenseValue(double monthlyExpenseValue) {
 		this.monthlyExpenseValue = monthlyExpenseValue;
 	}
+	
+	public void clean() {
+		setStartWithBalance(0);
+		setCurrentBalance(0);
+		setExpectedToCloseWithBalance(0);
+		setMonthlyRevenueValue(0);
+		setMonthlyExpenseValue(0);
+	}
 }

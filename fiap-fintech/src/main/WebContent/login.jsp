@@ -64,10 +64,10 @@
             <div class="col-md-6 mt-5 p-5">
                 <h1 class="text-center fw-bold login-title my-4">Ainda não tem uma conta?</h1>
                 <div class="container form-rectangle d-flex mt-5 p-4">
-                    <form method="post" action="register">
+                    <form method="post" action="dashboard">
                         <div class="mb-3">
                             <input class="form-text credentials-input-format" name="name" id="name" type="text"
-                                placeholder="seu nome completo">
+                                placeholder="seu nome completo" required>
                         </div>
                         <select class="form-text-placeholder credentials-input-format mb-3" name="gender" id="gender">
                             <option value="" disabled selected>seu gênero</option>
@@ -79,28 +79,28 @@
                             <input class="form-text credentials-input-format" name="gender" id="gender" type="text"      placeholder="seu gênero"> -->
                         <div class="mb-3">
                             <input class="form-text credentials-input-format" name="birthdate" id="birthdate" type="text"
-                                placeholder="o dia em que você nasceu" onfocus="(this.type='date')">
+                                placeholder="o dia em que você nasceu" onfocus="(this.type='date')" required>
                         </div>
                         <div class="mb-3">
                             <input class="form-text credentials-input-format" name="email" id="email" type="email"
-                                placeholder="seu melhor e-mail">
+                                placeholder="seu melhor e-mail" required>
                         </div>
                         <div class="mb-3">
                             <input class="form-text credentials-input-format" name="username_register" id="username_register" type="user"
-                                placeholder="escolha um usuário">
+                                placeholder="escolha um usuário" required>
                         </div>
                         <div class="mb-3">
                             <input class="form-text credentials-input-format" name="password_register" id="password_register" type="password"
-                                placeholder="agora uma senha">
+                                placeholder="agora uma senha" required>
                         </div>
                         <div class="mb-3">
                             <input class="form-text credentials-input-format" name="passwordcomparison" id="passwordcomparison" type="password"
-                                placeholder="repita a sua senha aqui">
+                                placeholder="repita a sua senha aqui" required>
                         </div>
 
                         <div class="text-center">
-                            <a id="registerButton" href="#" class="btn login-button mt-2" role="button"
-                                type="submit">Registrar</a>
+                            <button id="registerButton" class="btn login-button mt-2" role="button"
+                                type="submit">Registrar</button>
                         </div>
                     </form>
                 </div>

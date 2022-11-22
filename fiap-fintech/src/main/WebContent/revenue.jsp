@@ -29,7 +29,7 @@
 </head>
 <body class="bg-color">
     <header class="background input-header-text p-2">
-        <a class="mx-1" role="button" href="./dashboard.jsp"><img class="img-fluid " src="./resources/images/return_breadcrumb.svg"></a>
+        <a class="mx-1" role="button" href="dashboard"><img class="img-fluid " src="./resources/images/return_breadcrumb.svg"></a>
         <nobr>Adicionar nova receita...</nobr>
     </header>
     
