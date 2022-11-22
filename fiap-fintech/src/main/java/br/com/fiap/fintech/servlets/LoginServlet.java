@@ -14,7 +14,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/dashboard.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/dashboard");
 		rd.forward(request, response);
 	}
 }

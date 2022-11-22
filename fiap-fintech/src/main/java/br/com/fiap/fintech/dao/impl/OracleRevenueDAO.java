@@ -69,7 +69,6 @@ public class OracleRevenueDAO implements RevenueDAO {
 
 			Revenue revenue = null;
 			while (result.next()) {
-
 				java.sql.Date data = result.getDate("dt_receita");
 				Calendar revenueDate = Calendar.getInstance();
 				revenueDate.setTimeInMillis(data.getTime());

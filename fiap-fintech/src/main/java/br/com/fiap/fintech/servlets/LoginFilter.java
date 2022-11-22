@@ -23,7 +23,6 @@ public class LoginFilter extends HttpFilter implements Filter {
 
 		HttpServletRequest request  = (HttpServletRequest) servletRequest;
 		String username = request.getParameter("username");
-		String password = request.getParameter("password");
 
 		HttpSession session = request.getSession();
 		session.setAttribute("username", username);

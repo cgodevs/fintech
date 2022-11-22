@@ -13,9 +13,10 @@ public class Entry implements Serializable {
 	private Calendar entryDate;
 	private String isFixedEntry;
 	private String description;
-	
+	private boolean isRevenue;
+
 	public Entry() { super(); }
-	
+
 	public Entry(int entryCode, int userCode, double entryValue, String entryName, Calendar entryDate,
 			String isFixedEntry, String description) {
 		super();
@@ -70,5 +71,10 @@ public class Entry implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+	public boolean getIsRevenue() {
+		return isRevenue;
+	}
+	public void setisRevenue(boolean isRevenue) {
+		this.isRevenue = isRevenue;
+	}
 }
