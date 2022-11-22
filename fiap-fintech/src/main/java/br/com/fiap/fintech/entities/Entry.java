@@ -71,7 +71,7 @@ public class Entry implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public boolean isRevenue() {
+	public boolean getIsRevenue() {
 		return isRevenue;
 	}
 	public void setisRevenue(boolean isRevenue) {

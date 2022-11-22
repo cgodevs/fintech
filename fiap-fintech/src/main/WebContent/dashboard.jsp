@@ -100,7 +100,7 @@
     <!-- News cards (5 max)-->
     <div class="news-cards-scroll" id="newsCards">
     	<c:forEach var="entry" items="${comingNextEntries}">
-	    	<div class="card d-flex p-1 pe-2 money-in" class="${entry.isRevenue ? 'money-in' : 'money-out'}">
+	    	<div class="card d-flex p-1 pe-2">
 	            <div class="card-date d-flex"><fmt:formatDate type="time" pattern="dd/MM" value="${entry.entryDate.time}" /></div> 
 	            <div class="card-text d-flex my-2 text-center">${entry.entryName}</div>
 	            <div class="card-value d-flex"> R$ ${entry.entryValue}</div>

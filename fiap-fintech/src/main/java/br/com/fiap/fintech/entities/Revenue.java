@@ -13,7 +13,6 @@ public class Revenue extends Entry implements Serializable {
 	public Revenue(int revenueCode, int userCode, double revenueValue, String revenueName, Calendar revenueDate,
 			String isReceived, String isFixedRevenue, String description) {
 		super(revenueCode, userCode, revenueValue,  revenueName,  revenueDate, isFixedRevenue, description);
-		this.isReceived = isReceived;
 	}
 
 	public String getIsReceived() {

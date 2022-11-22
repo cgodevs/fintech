@@ -47,6 +47,7 @@ public class DashboardServlet extends HttpServlet {
 		
 		if (Objects.nonNull(allEntries)) 
 			setDashboard(allEntries);
+		
 		request.setAttribute("dashboardData", dashboard);	
 		request.setAttribute("comingNextEntries", comingNextEntries); 	
 		request.getRequestDispatcher("dashboard.jsp").forward(request, response);
@@ -148,7 +149,7 @@ public class DashboardServlet extends HttpServlet {
 	private static ArrayList<Entry> takeSomeNextEntries(ArrayList<Entry> allEntries, int numberOfEntries){
 		ArrayList<Entry> futureEntries = getFutureEntries(allEntries);
 		ArrayList<Entry> nextEntries = new ArrayList<Entry>();
-		if(futureEntries.isEmpty() || nextEntries.isEmpty())
+		if(futureEntries.isEmpty())
 			return null;
 		for(int n = 0; n < numberOfEntries; n++) 
 			nextEntries.add(futureEntries.get(n));
@@ -164,17 +165,18 @@ public class DashboardServlet extends HttpServlet {
 				nextEntries.add(entry);
 			}
 		}
+		sortEntries(nextEntries);
 		return nextEntries;
 	}
 	
 	private static void sortEntries(ArrayList<Entry> entries) {
-		for (int i = 0; i < entries.size(); i++) {
-			if(entries.size() > i) {
+		for (int i = 0; i < entries.size(); i++) { 	// insertion sort 
+			for (int j = i+1; j < entries.size(); j++) {
 				Entry currentEntry = entries.get(i);
-				Entry comparingEntry = entries.get(i+1);
+				Entry comparingEntry = entries.get(j);
 				if (currentEntry.getEntryDate().after(comparingEntry.getEntryDate())){
 					entries.set(i, comparingEntry);
-					entries.set(i+1, currentEntry);
+					entries.set(j, currentEntry);
 				}
 			}
 		}
