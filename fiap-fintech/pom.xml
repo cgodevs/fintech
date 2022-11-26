@@ -31,5 +31,10 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
 		    <version>3.0.1</version>
 		    <scope>provided</scope>
 	  </dependency>
+	  	<dependency>
+	    	<groupId>javax</groupId>
+	    	<artifactId>javaee-api</artifactId>
+	    	<version>8.0</version>
+		</dependency>	
   </dependencies>
 </project>
