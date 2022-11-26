@@ -1,0 +1,15 @@
+C:\Users\caroline.oliveira\git\fiap-fintech\fiap-fintech\src\main\java\br\com\fiap\fintech\dao\ExpenseDAO.java
+C:\Users\caroline.oliveira\git\fiap-fintech\fiap-fintech\src\main\java\br\com\fiap\fintech\servlets\LoginServlet.java
+C:\Users\caroline.oliveira\git\fiap-fintech\fiap-fintech\src\main\java\br\com\fiap\fintech\servlets\LoginFilter.java
+C:\Users\caroline.oliveira\git\fiap-fintech\fiap-fintech\src\main\java\br\com\fiap\fintech\servlets\LogOutServlet.java
+C:\Users\caroline.oliveira\git\fiap-fintech\fiap-fintech\src\main\java\br\com\fiap\fintech\singleton\ConnectionManager.java
+C:\Users\caroline.oliveira\git\fiap-fintech\fiap-fintech\src\main\java\br\com\fiap\fintech\servlets\EntryServlet.java
+C:\Users\caroline.oliveira\git\fiap-fintech\fiap-fintech\src\main\java\br\com\fiap\fintech\dao\impl\OracleExpenseDAO.java
+C:\Users\caroline.oliveira\git\fiap-fintech\fiap-fintech\src\main\java\br\com\fiap\fintech\entities\Revenue.java
+C:\Users\caroline.oliveira\git\fiap-fintech\fiap-fintech\src\main\java\br\com\fiap\fintech\singleton\Dashboard.java
+C:\Users\caroline.oliveira\git\fiap-fintech\fiap-fintech\src\main\java\br\com\fiap\fintech\dao\RevenueDAO.java
+C:\Users\caroline.oliveira\git\fiap-fintech\fiap-fintech\src\main\java\br\com\fiap\fintech\dao\impl\OracleRevenueDAO.java
+C:\Users\caroline.oliveira\git\fiap-fintech\fiap-fintech\src\main\java\br\com\fiap\fintech\factory\DAOFactory.java
+C:\Users\caroline.oliveira\git\fiap-fintech\fiap-fintech\src\main\java\br\com\fiap\fintech\servlets\DashboardServlet.java
+C:\Users\caroline.oliveira\git\fiap-fintech\fiap-fintech\src\main\java\br\com\fiap\fintech\entities\Expense.java
+C:\Users\caroline.oliveira\git\fiap-fintech\fiap-fintech\src\main\java\br\com\fiap\fintech\entities\Entry.java
