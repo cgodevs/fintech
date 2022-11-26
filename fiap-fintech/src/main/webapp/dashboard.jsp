@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="br.com.fiap.fintech.entities.Revenue"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!doctype html>
 <html lang="pt-BR">
 
@@ -55,7 +55,7 @@
                         <div class="dd-item-wrapper">
                             <a class="nav-link dropdown-toggle active navigation-text-active" id="newEntryDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">Novo Lançamento</a>
-                            <ul class="dropdown-menu mt-3" aria-labelled by="newEntryDropdown">
+                            <ul class="dropdown-menu mt-3" aria-labelled-by="newEntryDropdown">
                                 <li><a class="dropdown-item navigation-text" href="revenue.jsp">Nova receita</a></li>
                                 <li><a class="dropdown-item navigation-text" href="expense.jsp">Nova despesa</a></li>
                                 <li><a class="dropdown-item navigation-text disabled" href="#">Novo lembrete</a></li>
