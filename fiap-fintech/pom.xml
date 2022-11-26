@@ -24,4 +24,12 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
       </plugin>
     </plugins>
   </build>
+	  <dependencies>
+	  	<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>3.0.1</version>
+		    <scope>provided</scope>
+	  </dependency>
+  </dependencies>
 </project>
