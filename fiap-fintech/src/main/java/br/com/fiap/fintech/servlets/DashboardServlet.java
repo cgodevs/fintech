@@ -151,7 +151,8 @@ public class DashboardServlet extends HttpServlet {
 		ArrayList<Entry> nextEntries = new ArrayList<Entry>();
 		if(futureEntries.isEmpty())
 			return null;
-		for(int n = 0; n < numberOfEntries; n++) 
+		int entriesNum = numberOfEntries > futureEntries.size() ? futureEntries.size(): numberOfEntries;
+		for(int n = 0; n < entriesNum; n++) 
 			nextEntries.add(futureEntries.get(n));
 		return nextEntries;
 	}
